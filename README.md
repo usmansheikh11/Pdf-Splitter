@@ -1,7 +1,3 @@
-Here’s a README template for your GitHub repository, describing the Python script that processes PDF files:
-
----
-
 # PDF Splitter for Research and Appendix
 
 This Python script processes PDF files in a specified directory and splits them into two separate PDFs: one containing the research content and the other containing the appendix. The script uses the `pypdf` library to read and write PDF files, and it organizes the output into distinct folders for easier management.
