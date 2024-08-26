@@ -1,0 +1,41 @@
+from pypdf import PdfReader, PdfWriter
+import os
+
+
+input_path = './files'
+research_path = './research'
+appendix_path = './appendix'
+
+
+if not os.path.exists(research_path):
+    os.makedirs(research_path)
+
+if not os.path.exists(appendix_path):
+    os.makedirs(appendix_path)    
+
+files = os.listdir(input_path)
+
+
+
+for file in files:
+    reader = PdfReader(f"{input_path}/{file}")
+    number_of_pages = len(reader.pages)
+    
+    for page in range(0, number_of_pages):
+        text = reader.pages[page].extract_text()
+        
+        if 'appendix' in str.lower(text):
+            research_pdf = PdfWriter()
+            appendix_pdf = PdfWriter()
+            
+            for x in range(0, page):
+                research_pdf.add_page(reader.pages[x])
+            
+            for x in range(page, number_of_pages):   
+                appendix_pdf.add_page(reader.pages[x])
+                
+                
+            research_pdf.write(f"{research_path}/{file}")  
+            appendix_pdf.write(f"{appendix_path}/{file}")
+
+        
